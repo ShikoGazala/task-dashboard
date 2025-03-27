@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Ou
 import { FormsModule } from '@angular/forms';
 import { Project } from '../../models/project.model';
 import { TaskService } from '../../services/task.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-filter-bar',
@@ -21,12 +22,14 @@ export class FilterBarComponent {
   selectedStatus: string | undefined;
   selectedPriority: string | undefined;
   selectedAssignee: number | undefined;
+  private readonly destroy$ = new Subject<void>();
 
   constructor(private taskService: TaskService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
-
-    this.taskService.projects$.subscribe(projects => {
+    this.taskService.projects$
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(projects => {
       if (projects?.length)
         this.updateFilters(projects);
     });
@@ -70,5 +73,10 @@ export class FilterBarComponent {
       this.selectedAssignee = undefined;
     }
     this.onFilterChange();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

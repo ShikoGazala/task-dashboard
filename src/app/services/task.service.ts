@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Project } from '../models/project.model';
 import { RealtimeService } from './realtime.service';
@@ -7,6 +7,7 @@ import { TaskStatus } from '../models/task.model';
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
+  private readonly destroy$ = new Subject<void>();
   private readonly projectsSubject = new BehaviorSubject<Project[]>([]);
   public readonly projects$ = this.projectsSubject.asObservable();
 
@@ -23,7 +24,9 @@ export class TaskService {
   }
 
   private handleRealtimeUpdates(): void {
-    this.realtime.taskUpdates$.subscribe(update => {
+    this.realtime.taskUpdates$
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(update => {
       const projects = this.projectsSubject.getValue().map(project => ({
         ...project,
         recentTasks: project.recentTasks.map(task =>
@@ -35,7 +38,9 @@ export class TaskService {
       this.projectsSubject.next(projects);
     });
 
-    this.realtime.taskMoved$.subscribe(move => {
+    this.realtime.taskMoved$
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(move => {
       this._moveTaskInternal(move.taskId, move.fromProjectId, move.toProjectId, move.toIndex, false);
       requestAnimationFrame(() => {
         const projects = [...this.projectsSubject.getValue()];
@@ -43,7 +48,9 @@ export class TaskService {
       });
     });
 
-    this.realtime.userMoved$.subscribe(move => {
+    this.realtime.userMoved$
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(move => {
       this._moveUserInternal(move.userId, move.fromProjectId, move.toProjectId, false);
       requestAnimationFrame(() => {
         const projects = [...this.projectsSubject.getValue()];
@@ -118,5 +125,10 @@ export class TaskService {
     if (broadcast) {
       this.realtime.broadcastUserMoved({ userId, fromProjectId, toProjectId });
     }
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 import { Project } from '../../models/project.model';
 import { Task } from '../../models/task.model';
 import { TaskService } from '../../services/task.service';
@@ -22,15 +22,20 @@ import { User } from '../../models/user.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskDashboardComponent {
+  private readonly destroy$ = new Subject<void>();
   projects$: Observable<Project[]>;
   filteredProjects$ = new BehaviorSubject<Project[]>([]);
 
   constructor(private taskService: TaskService, private cdr: ChangeDetectorRef) {
-    this.taskService.projects$.subscribe(() => this.cdr.markForCheck());
+    this.taskService.projects$
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(() => this.cdr.markForCheck());
 
     this.projects$ = this.taskService.projects$;
 
-    this.projects$.subscribe(projects => {
+    this.projects$
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(projects => {
       this.filteredProjects$.next(projects);
     });
   }
@@ -42,6 +47,7 @@ export class TaskDashboardComponent {
   onFilterChange(filterData: { status?: string, priority?: string, assignee?: any }): void {
     this.projects$
       .pipe(
+        takeUntil(this.destroy$),
         map(projects => projects.map(project => ({
           ...project,
           recentTasks: project.recentTasks.filter(task => {
@@ -63,7 +69,7 @@ export class TaskDashboardComponent {
     toProjectId: number;
     toIndex: number;
   }) {
-    
+
     this.taskService.moveTask(
       event.task.id,
       event.fromProjectId,
@@ -73,7 +79,7 @@ export class TaskDashboardComponent {
   }
 
   onUserMoved(event: {
-    
+
     user: User;
     fromProjectId: number;
     toProjectId: number;
@@ -85,5 +91,10 @@ export class TaskDashboardComponent {
     return (this.filteredProjects$.value || [])
       .filter(p => p.id !== currentId)
       .map(p => p.id.toString() + '-users');
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
