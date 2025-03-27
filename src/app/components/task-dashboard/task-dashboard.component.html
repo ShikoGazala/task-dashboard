@@ -1,0 +1,13 @@
+<h1>Task Management Dashboard</h1>
+<app-filter-bar (filterChange)="onFilterChange($event)"></app-filter-bar>
+
+<section class="dashboard">
+  <app-project-card
+    *ngFor="let project of filteredProjects$ | async"
+    [project]="project"
+    [connectedProjectIds]="getConnectedIds(project.id)"
+    [connectedUserListIds]="getConnectedUserIds(project.id)"
+    (taskMoved)="onTaskMoved($event)"
+    (userMoved)="onUserMoved($event)"
+  ></app-project-card>
+</section>

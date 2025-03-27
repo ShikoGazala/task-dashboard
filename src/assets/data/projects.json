@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "name": "Website Redesign",
+    "deadline": "2025-04-15",
+    "completionPercentage": 68,
+    "recentTasks": [
+      { "id": 101, "name": "Update homepage layout", "status": "completed", "assignee": 201, "priority": "low", "projectId": 1 },
+      { "id": 102, "name": "Implement responsive design", "status": "in-progress", "assignee": 201, "priority": "high", "projectId": 1 },
+      { "id": 103, "name": "Optimize image loading", "status": "pending", "assignee": 202, "priority": "high", "projectId": 1 }
+    ],
+    "teamMembers": [
+      { "id": 201, "name": "Sarah Chen", "role": "Lead Designer", "avatar": "sarah_c.jpg" },
+      { "id": 202, "name": "Miguel Rodriguez", "role": "Frontend Developer", "avatar": "miguel_r.jpg" },
+      { "id": 203, "name": "Priya Patel", "role": "UX Researcher", "avatar": "priya_p.jpg" }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Mobile App Development",
+    "deadline": "2025-05-30",
+    "completionPercentage": 42,
+    "recentTasks": [
+      { "id": 104, "name": "Create user authentication flow", "status": "completed", "assignee": 204, "priority": "high", "projectId": 2 },
+      { "id": 105, "name": "Develop notification system", "status": "in-progress", "assignee": 204, "priority": "high", "projectId": 2 },
+      { "id": 106, "name": "Design settings screen", "status": "pending", "assignee": 205, "priority": "low", "projectId": 2 },
+      { "id": 107, "name": "Fix login bugs", "status": "in-progress", "assignee": 207, "priority": "medium", "projectId": 2 }
+    ],
+    "teamMembers": [
+      { "id": 204, "name": "James Wilson", "role": "Project Manager", "avatar": "james_w.jpg" },
+      { "id": 205, "name": "Aisha Johnson", "role": "Mobile Developer", "avatar": "aisha_j.jpg" },
+      { "id": 206, "name": "Tao Zhang", "role": "Backend Developer", "avatar": "tao_z.jpg" },
+      { "id": 207, "name": "Emma Davis", "role": "QA Specialist", "avatar": "emma_d.jpg" }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Marketing Campaign",
+    "deadline": "2025-04-05",
+    "completionPercentage": 85,
+    "recentTasks": [
+      { "id": 108, "name": "Finalize social media strategy", "status": "completed", "assignee": 208, "priority": "high", "projectId": 3 },
+      { "id": 109, "name": "Create promotional video", "status": "completed", "assignee": 208, "priority": "high", "projectId": 3 },
+      { "id": 110, "name": "Schedule email newsletter", "status": "in-progress", "assignee": 209, "priority": "low", "projectId": 3 }
+    ],
+    "teamMembers": [
+      { "id": 208, "name": "Daniel Kim", "role": "Marketing Lead", "avatar": "daniel_k.jpg" },
+      { "id": 209, "name": "Olivia Martinez", "role": "Content Creator", "avatar": "olivia_m.jpg" }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Data Analysis Platform",
+    "deadline": "2025-06-10",
+    "completionPercentage": 15,
+    "recentTasks": [
+      { "id": 111, "name": "Define data structure", "status": "completed", "assignee": 210, "priority": "high", "projectId": 4 },
+      { "id": 112, "name": "Create database schema", "status": "in-progress", "assignee": 211, "priority": "high", "projectId": 4 },
+      { "id": 113, "name": "Develop visualization components", "status": "pending", "assignee": 211, "priority": "high", "projectId": 4 },
+      { "id": 114, "name": "Implement data import tool", "status": "pending", "assignee": 212, "priority": "low", "projectId": 4 }
+    ],
+    "teamMembers": [
+      { "id": 210, "name": "Alex Thompson", "role": "Data Scientist", "avatar": "alex_t.jpg" },
+      { "id": 211, "name": "Nina Patel", "role": "UI Designer", "avatar": "nina_p.jpg" },
+      { "id": 212, "name": "Robert Chen", "role": "Full-stack Developer", "avatar": "robert_c.jpg" }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Customer Support Portal",
+    "deadline": "2025-04-30",
+    "completionPercentage": 53,
+    "recentTasks": [
+      { "id": 115, "name": "Design ticket management interface", "status": "completed", "assignee": 213, "priority": "high", "projectId": 5 },
+      { "id": 116, "name": "Implement search functionality", "status": "completed", "assignee": 213, "priority": "high", "projectId": 5 },
+      { "id": 117, "name": "Create knowledge base structure", "status": "in-progress", "assignee": 214, "priority": "high", "projectId": 5 },
+      { "id": 118, "name": "Test user account system", "status": "pending", "assignee": 214, "priority": "low", "projectId": 5 }
+    ],
+    "teamMembers": [
+      { "id": 213, "name": "Lisa Wang", "role": "Product Manager", "avatar": "lisa_w.jpg" },
+      { "id": 214, "name": "Marcus Johnson", "role": "Backend Developer", "avatar": "marcus_j.jpg" },
+      { "id": 215, "name": "Sophie Kim", "role": "UX Designer", "avatar": "sophie_k.jpg" },
+      { "id": 216, "name": "David Miller", "role": "QA Engineer", "avatar": "david_m.jpg" }
+    ]
+  }
+]

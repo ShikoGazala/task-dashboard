@@ -1,0 +1,22 @@
+<div class="filter-bar">
+    <label>Status:</label>
+    <select [(ngModel)]="selectedStatus" (ngModelChange)="onFilterChange()">
+      <option value="">All</option>  
+      <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+    </select>
+    <button *ngIf="selectedStatus" (click)="clearFilter('status')">Clear</button>  
+  
+    <label>Priority:</label>
+    <select [(ngModel)]="selectedPriority" (ngModelChange)="onFilterChange()">
+      <option value="">All</option>  
+      <option *ngFor="let priority of priorities" [value]="priority">{{ priority }}</option>
+    </select>
+    <button *ngIf="selectedPriority" (click)="clearFilter('priority')">Clear</button>  
+  
+    <label>Assignee:</label>
+    <select [(ngModel)]="selectedAssignee" (ngModelChange)="onFilterChange()">
+      <option value="">All</option>  
+      <option *ngFor="let assignee of assignees" [value]="assignee">{{ assignee }}</option>
+    </select>
+    <button *ngIf="selectedAssignee" (click)="clearFilter('assignee')">Clear</button>  
+  </div>

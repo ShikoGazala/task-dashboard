@@ -1,0 +1,13 @@
+<div class="team-members">
+  <ng-container *ngFor="let member of members">
+    <img
+    cdkDrag [cdkDragData]="member"
+      appLazyLoad
+      [attr.data-src]="'/assets/images/' + member.avatar"
+      class="avatar"
+      [alt]="member.name"
+      [matTooltip]="member.name + ' - ' + member.role"
+      loading="lazy"
+    />
+  </ng-container>
+</div>

@@ -1,0 +1,18 @@
+<div *ngIf="tasks.length; else noTasks">
+    <ul>
+      <li *ngFor="let task of tasks" cdkDrag [cdkDragData]="task">
+        {{ task.name }}
+        <mat-chip [color]="task.status | statusColor" selected>
+          {{ task.status }}
+        </mat-chip>
+
+        <button mat-stroked-button color="primary" *ngIf="task.status !== TaskStatus.Completed" (click)="markAsCompleted(task)" style="margin-left: 8px;">
+          Mark as done
+        </button>
+      </li>
+    </ul>
+</div>
+
+<ng-template #noTasks>
+  <p>No tasks available.</p>
+</ng-template>

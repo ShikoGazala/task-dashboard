@@ -1,0 +1,36 @@
+<mat-card class="project-card">
+  <mat-card-header>
+    <mat-card-title>{{ project.name }}</mat-card-title>
+    <mat-card-subtitle>Deadline: {{ project.deadline }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-progress-bar mode="determinate" [value]="project.completionPercentage"></mat-progress-bar>
+
+    <h4>Recent Tasks</h4>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="project.recentTasks"
+      [cdkDropListConnectedTo]="connectedProjectIds"
+      [id]="project.id.toString()"
+      (cdkDropListDropped)="onTaskDrop($event)"
+    >
+      <app-task-list
+        [tasks]="project.recentTasks"
+      ></app-task-list>
+    </div>
+  </mat-card-content>
+
+  <mat-card-footer>
+    <div
+    cdkDropList
+    [cdkDropListData]="project.recentTasks"
+    [cdkDropListConnectedTo]="connectedUserListIds"
+    [id]="project.id.toString() + '-users'"
+    (cdkDropListDropped)="onUserDrop($event)"
+  >
+    <app-team-member-list [members]="project.teamMembers"></app-team-member-list>
+  </div>
+  </mat-card-footer>
+</mat-card>
